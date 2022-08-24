@@ -21,7 +21,8 @@ import java.util.List;
 // Lombok generate toString method.
 @ToString
 @Entity
-@Table(name = "tb_processo")
+// @Table(name = "tb_processo") > Quando eu anoto @Table na entidade, o data.sql não consegue inserir os dados na tabela,
+// porém, quando removido @Table, os scripts bateram e funcionou, tanto o schema.sql, quanto data.sql
 public class Processo implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -29,11 +30,11 @@ public class Processo implements Serializable {
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(name = "numero_processo")
+    //@Column(name = "numero_processo")
     private Long numero;
-    @Column(name = "ano_processo")
+    // @Column(name = "ano_processo")
     private Integer ano;
-    @Column(name = "data_processo")
+    //@Column(name = "data_processo")
     private LocalDate dataCadastro;
     @OneToMany(mappedBy = "processo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Pessoa> pessoas = new ArrayList<>();
