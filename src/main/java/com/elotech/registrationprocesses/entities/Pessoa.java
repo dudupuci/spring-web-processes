@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Entity
+
 // Lombok auto-generation getters and setters.
 @Getter
 @Setter
@@ -18,6 +18,8 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 // Lombok generate toString method.
 @ToString
+@Entity
+@Table(name = "tb_pessoa")
 public class Pessoa implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -34,14 +36,21 @@ public class Pessoa implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "cpf")
     private String cpf;
+    @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
+    @Column(name = "data_cadastro")
     private LocalDate dataCadastro;
-
     @ManyToOne
+    @JoinColumn(name = "id_processo")
     private Processo processo;
+
+
 
 
 }
