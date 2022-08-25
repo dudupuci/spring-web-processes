@@ -19,6 +19,7 @@ import java.time.LocalDate;
 // Lombok generate toString method.
 @ToString
 @Entity
+@Table(name="tb_pessoa")
 public class Pessoa implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -36,18 +37,20 @@ public class Pessoa implements Serializable {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private Long id;
-    //@Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     private String nome;
-    //@Column(name = "cpf")
-    
+    @Column(name = "cpf", nullable = false)
     private String cpf;
-    //@Column(name = "data_nascimento")
+    @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
-    // @Column(name = "data_cadastro")
+
+    @Column(name = "data_cadastro", nullable = false)
     private LocalDate dataCadastro;
+
     @ManyToOne
-    //@JoinColumn(name = "id_processo")
+    @JoinColumn(name = "id_processo")
     private Processo processo;
 
 
