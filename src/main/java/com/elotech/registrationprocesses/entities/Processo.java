@@ -36,7 +36,7 @@ public class Processo implements Serializable {
     private Integer ano;
     //@Column(name = "data_processo")
     private LocalDate dataCadastro;
-    @OneToMany(mappedBy = "processo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "processo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Pessoa> pessoas = new ArrayList<>();
 
     public Processo() {

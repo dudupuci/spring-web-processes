@@ -12,7 +12,8 @@ nome varchar(50) NOT NULL,
 cpf varchar(11) NOT NULL,
 dataNascimento date NOT NULL,
 dataCadastro date NOT NULL,
-/* id_processo como @JoinColumn, foreign key id_processo */
+id_processo INT,
+FOREIGN KEY (id_processo) REFERENCES tb_processo(id),
 PRIMARY KEY (id)
 );
 
