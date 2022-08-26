@@ -1,7 +1,6 @@
 package com.elotech.registrationprocesses.entities.services;
 
 import com.elotech.registrationprocesses.entities.Pessoa;
-import com.elotech.registrationprocesses.entities.Processo;
 import com.elotech.registrationprocesses.entities.repositories.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +15,10 @@ public class PessoaService {
 
     public List<Pessoa> findAll() {
         return pessoaRepository.findAll();
+    }
+
+    public void deleteAll(List<Pessoa> list){
+        pessoaRepository.deleteAll(list);
     }
 
     public Pessoa findById(Long id) {

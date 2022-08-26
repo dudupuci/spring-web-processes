@@ -1,5 +1,6 @@
 package com.elotech.registrationprocesses.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,12 +27,13 @@ public class Pessoa implements Serializable {
     public Pessoa() {
     }
 
-    public Pessoa(Long id, String nome, String cpf, LocalDate dataNascimento, LocalDate dataCadastro) {
+    public Pessoa(Long id, String nome, String cpf, LocalDate dataNascimento, LocalDate dataCadastro, Processo processo) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.dataCadastro = dataCadastro;
+        this.processo = processo;
     }
 
     @Id
@@ -51,6 +53,7 @@ public class Pessoa implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_processo")
+    @JsonIgnore // Anotei para não dar o erro de JSON na requisição, se não entraria em loop infinito.
     private Processo processo;
 
 

@@ -31,6 +31,7 @@ public class PessoaController {
         return ResponseEntity.ok().body(pessoa);
     }
 
+    // post
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Pessoa> insertPessoa(@RequestBody Pessoa pessoa) {
         pessoa = pessoaService.insertPessoa(pessoa);
@@ -38,6 +39,7 @@ public class PessoaController {
         return ResponseEntity.created(uri).body(pessoa);
     }
 
+    // put >> arrumar, nao esta dando muito certo
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Pessoa> updatePessoa(@PathVariable Long id, @RequestBody Pessoa pessoa) {
         Pessoa oldPessoa = pessoaService.findById(id);
@@ -51,6 +53,14 @@ public class PessoaController {
             DELETE)
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         pessoaService.deletePessoa(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    // arrumar > nao tem como passar lista na requisicao
+    public ResponseEntity<Void> deleteAll(List<Pessoa> list) {
+        list = pessoaService.findAll();
+        pessoaService.deleteAll(list);
         return ResponseEntity.noContent().build();
     }
 

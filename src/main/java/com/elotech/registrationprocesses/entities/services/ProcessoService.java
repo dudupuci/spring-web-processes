@@ -22,7 +22,7 @@ public class ProcessoService {
         return processoRepository.findById(id).orElse(null);
     }
 
-    public Processo createProcesso(Processo processo) {
+    public Processo insertProcesso(Processo processo) {
         return processoRepository.save(processo);
     }
 
