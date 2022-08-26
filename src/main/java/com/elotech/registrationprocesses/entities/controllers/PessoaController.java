@@ -44,6 +44,7 @@ public class PessoaController {
     public ResponseEntity<Pessoa> updatePessoa(@PathVariable Long id, @RequestBody Pessoa pessoa) {
         Pessoa oldPessoa = pessoaService.findById(id);
         pessoaService.updateDataPessoa(pessoa, oldPessoa);
+        pessoaService.updateAndSavePessoa(id, pessoa);
         return ResponseEntity.ok().body(pessoa);
     }
 

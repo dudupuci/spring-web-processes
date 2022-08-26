@@ -50,13 +50,13 @@ public class PessoaService {
         return null;
     }
 
-
+    
     public void updateDataPessoa(Pessoa newPessoa, Pessoa oldPessoa) {
-        newPessoa.setNome(oldPessoa.getNome());
-        newPessoa.setCpf(oldPessoa.getCpf());
-        newPessoa.setDataCadastro(oldPessoa.getDataCadastro());
-        newPessoa.setDataNascimento(oldPessoa.getDataNascimento());
-        newPessoa.setProcesso(oldPessoa.getProcesso());
+        oldPessoa.setNome(newPessoa.getNome());
+        oldPessoa.setCpf(newPessoa.getCpf());
+        oldPessoa.setDataCadastro(newPessoa.getDataCadastro());
+        oldPessoa.setDataNascimento(newPessoa.getDataNascimento());
+        oldPessoa.setProcesso(newPessoa.getProcesso());
     }
 
 
