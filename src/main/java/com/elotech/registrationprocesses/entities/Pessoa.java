@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import net.bytebuddy.asm.Advice;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,11 +43,12 @@ public class Pessoa implements Serializable {
     private Long id;
     @Column(name = "nome", nullable = false)
     private String nome;
-    @Column(name = "cpf", nullable = false)
+
+    @Column(name = "cpf", nullable = false, unique = true)
+    //@CPF(message = "Cpf Obrigatório!")
     private String cpf;
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
-
     @Column(name = "data_cadastro", nullable = false)
     private LocalDate dataCadastro;
 

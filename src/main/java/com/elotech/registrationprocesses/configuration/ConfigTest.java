@@ -41,7 +41,7 @@ public class ConfigTest implements CommandLineRunner {
         Processo processo2 = new Processo(null, 202020L, 2022, LocalDate.now(), Arrays.asList(pessoa3));
 
         pessoa3.setId(null);
-        pessoa3.setNome("Bruno Fávaro");
+        pessoa3.setNome("Bruno Favaro");
         pessoa3.setCpf("06744189802");
         pessoa3.setDataCadastro(LocalDate.now());
         pessoa3.setDataNascimento(LocalDate.of(1995, 8, 22));

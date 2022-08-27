@@ -5,7 +5,7 @@ import com.elotech.registrationprocesses.entities.repositories.ProcessoRepositor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLOutput;
+
 import java.util.List;
 
 @Service
@@ -50,10 +50,10 @@ public class ProcessoService {
 
 
     public void updateProcesso(Processo newProcesso, Processo oldProcesso) {
-        newProcesso.setNumero(oldProcesso.getNumero());
-        newProcesso.setPessoas(oldProcesso.getPessoas());
-        newProcesso.setAno(oldProcesso.getAno());
-        newProcesso.setDataCadastro(oldProcesso.getDataCadastro());
+        oldProcesso.setNumero(newProcesso.getNumero());
+        oldProcesso.setPessoas(newProcesso.getPessoas());
+        oldProcesso.setAno(newProcesso.getAno());
+        oldProcesso.setDataCadastro(newProcesso.getDataCadastro());
 
     }
 

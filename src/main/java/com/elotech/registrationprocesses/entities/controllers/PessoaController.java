@@ -3,14 +3,18 @@ package com.elotech.registrationprocesses.entities.controllers;
 import com.elotech.registrationprocesses.entities.Pessoa;
 import com.elotech.registrationprocesses.entities.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.annotation.HttpConstraint;
 import java.net.URI;
 import java.util.List;
 
 @RestController
+// Accept all and resolve cors
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/pessoas")
 public class PessoaController {
 
@@ -29,6 +33,7 @@ public class PessoaController {
     public ResponseEntity<Pessoa> findById(@PathVariable Long id) {
         Pessoa pessoa = pessoaService.findById(id);
         return ResponseEntity.ok().body(pessoa);
+
     }
 
     // post
@@ -39,7 +44,8 @@ public class PessoaController {
         return ResponseEntity.created(uri).body(pessoa);
     }
 
-    // put >> arrumar, nao esta dando muito certo
+
+    // put, update
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Pessoa> updatePessoa(@PathVariable Long id, @RequestBody Pessoa pessoa) {
         Pessoa oldPessoa = pessoaService.findById(id);
@@ -57,8 +63,8 @@ public class PessoaController {
         return ResponseEntity.noContent().build();
     }
 
+    // delete all
     @RequestMapping(method = RequestMethod.DELETE)
-    // arrumar > nao tem como passar lista na requisicao
     public ResponseEntity<Void> deleteAll(List<Pessoa> list) {
         list = pessoaService.findAll();
         pessoaService.deleteAll(list);

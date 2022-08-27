@@ -31,7 +31,7 @@ public class Processo implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false)
     private Long id;
-    @Column(name = "numero_processo", nullable = false)
+    @Column(name = "numero_processo", nullable = false, unique = true)
     private Long numero;
     @Column(name = "ano_processo", nullable = false)
     private Integer ano;

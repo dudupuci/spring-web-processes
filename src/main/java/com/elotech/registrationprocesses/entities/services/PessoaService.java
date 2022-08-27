@@ -2,6 +2,7 @@ package com.elotech.registrationprocesses.entities.services;
 
 import com.elotech.registrationprocesses.entities.Pessoa;
 import com.elotech.registrationprocesses.entities.repositories.PessoaRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,7 @@ public class PessoaService {
         return null;
     }
 
-    
+
     public void updateDataPessoa(Pessoa newPessoa, Pessoa oldPessoa) {
         oldPessoa.setNome(newPessoa.getNome());
         oldPessoa.setCpf(newPessoa.getCpf());
