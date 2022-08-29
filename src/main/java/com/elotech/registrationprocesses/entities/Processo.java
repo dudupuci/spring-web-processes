@@ -4,6 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.annotation.processing.Generated;
 import javax.persistence.*;
@@ -36,6 +38,8 @@ public class Processo implements Serializable {
     @Column(name = "ano_processo", nullable = false)
     private Integer ano;
     @Column(name = "data_processo", nullable = false)
+    @NotNull
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataCadastro;
     @Column(nullable = false)
     @OneToMany(mappedBy = "processo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
