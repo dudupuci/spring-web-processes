@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -47,9 +48,11 @@ public class Pessoa implements Serializable {
     @Column(name = "cpf", nullable = false, unique = true)
     //@CPF(message = "Cpf Obrigatório!")
     private String cpf;
-    @Column(name = "data_nascimento", nullable = false)
+    @Column(name = "data_nascimento")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;
-    @Column(name = "data_cadastro", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "data_cadastro")
     private LocalDate dataCadastro;
 
     @ManyToOne

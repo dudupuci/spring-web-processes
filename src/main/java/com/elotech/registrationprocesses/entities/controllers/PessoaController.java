@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.annotation.HttpConstraint;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class PessoaController {
 
     // post
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Pessoa> insertPessoa(@RequestBody Pessoa pessoa) {
+    public ResponseEntity<Pessoa> insertPessoa(@Valid @RequestBody Pessoa pessoa) {
         pessoa = pessoaService.insertPessoa(pessoa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pessoa.getId()).toUri();
         return ResponseEntity.created(uri).body(pessoa);

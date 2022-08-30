@@ -37,9 +37,8 @@ public class Processo implements Serializable {
     private Long numero;
     @Column(name = "ano_processo", nullable = false)
     private Integer ano;
-    @Column(name = "data_processo", nullable = false)
-    @NotNull
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "data_processo")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataCadastro;
     @Column(nullable = false)
     @OneToMany(mappedBy = "processo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

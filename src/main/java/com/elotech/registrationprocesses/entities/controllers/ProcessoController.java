@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class ProcessoController {
 
     // put
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Processo> insertProcesso(@RequestBody Processo processo) {
+    public ResponseEntity<Processo> insertProcesso(@Valid @RequestBody Processo processo) {
         processo = processoService.insertProcesso(processo);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(processo.getId()).toUri();
         return ResponseEntity.created(uri).body(processo);
