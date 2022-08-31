@@ -50,6 +50,7 @@ public class ProcessoController {
         processo = processoService.insertProcesso(processo);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(processo.getId()).toUri();
         return ResponseEntity.created(uri).body(processo);
+
     }
 
 

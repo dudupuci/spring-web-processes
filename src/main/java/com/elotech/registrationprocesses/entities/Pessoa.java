@@ -40,12 +40,12 @@ public class Pessoa implements Serializable {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
-    @Column(name = "nome", nullable = false)
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf", nullable = false, unique = true)
+    @Column(name = "cpf", unique = true)
     //@CPF(message = "Cpf Obrigatório!")
     private String cpf;
     @Column(name = "data_nascimento")
