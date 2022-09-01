@@ -28,6 +28,19 @@ import java.util.List;
 public class Processo implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public Processo() {
+
+    }
+
+    public Processo(Long id, Long numero, Integer ano, LocalDate dataCadastro, List<Pessoa> pessoas) {
+        this.id = id;
+        this.numero = numero;
+        this.ano = ano;
+        this.dataCadastro = dataCadastro;
+        this.pessoas = pessoas;
+    }
+
+
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -44,17 +57,6 @@ public class Processo implements Serializable {
     @OneToMany(mappedBy = "processo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Pessoa> pessoas = new ArrayList<>();
 
-    public Processo() {
-
-    }
-
-    public Processo(Long id, Long numero, Integer ano, LocalDate dataCadastro, List<Pessoa> pessoas) {
-        this.id = id;
-        this.numero = numero;
-        this.ano = ano;
-        this.dataCadastro = dataCadastro;
-        this.pessoas = pessoas;
-    }
 
 
 }
