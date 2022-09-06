@@ -2,9 +2,12 @@ package com.elotech.registrationprocesses.entities.services;
 
 import com.elotech.registrationprocesses.entities.Pessoa;
 import com.elotech.registrationprocesses.entities.repositories.PessoaRepository;
+import com.elotech.registrationprocesses.entities.services.exceptions.ControllerNotFoundException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -22,8 +25,10 @@ public class PessoaService {
         pessoaRepository.deleteAll(list);
     }
 
+    // verificar se existe melhor forma (incorreto)
     public Pessoa findById(Long id) {
-        return pessoaRepository.findById(id).orElse(null);
+        return pessoaRepository.findById(id).orElseThrow(
+                () -> new ControllerNotFoundException(HttpStatus.NOT_FOUND));
     }
 
     public Pessoa insertPessoa(Pessoa pessoa) {

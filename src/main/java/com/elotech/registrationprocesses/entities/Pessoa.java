@@ -5,10 +5,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -42,15 +46,23 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
-    @Column(name = "nome")
-    private String nome;
 
+    @Column(name = "nome")
+    @Length(min = 4, max = 50, message = "Insira corretamente seu nome!")
+    @NotEmpty(message = "O nome não pode ser vazio ou nulo!")
+    private String nome;
+    @Size(min = 11, max = 11, message = "CPF inválido!")
+    @NotBlank(message = "CPF não pode ser em branco!")
     @Column(name = "cpf", unique = true)
-    //@CPF(message = "Cpf Obrigatório!")
     private String cpf;
+
+
     @Column(name = "data_nascimento")
+    @Past(message = "Insira uma data de nascimento correta!")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;
+
+    @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_cadastro")
     private LocalDate dataCadastro;

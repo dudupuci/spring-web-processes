@@ -2,6 +2,7 @@ package com.elotech.registrationprocesses.entities.controllers;
 
 import com.elotech.registrationprocesses.entities.Pessoa;
 import com.elotech.registrationprocesses.entities.services.PessoaService;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.annotation.HttpConstraint;
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.net.URI;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
+
     // get All
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Pessoa>> findAll() {
@@ -33,8 +36,7 @@ public class PessoaController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Pessoa> findById(@PathVariable Long id) {
         Pessoa pessoa = pessoaService.findById(id);
-        return ResponseEntity.ok().body(pessoa);
-
+            return ResponseEntity.ok().body(pessoa);
     }
 
     // post

@@ -1,14 +1,14 @@
 package com.elotech.registrationprocesses.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.annotation.processing.Generated;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -44,15 +44,21 @@ public class Processo implements Serializable {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Long id;
-    @Column(name = "numero_processo", nullable = false, unique = true)
+
+    @Column(name = "numero_processo", unique = true)
     private Long numero;
-    @Column(name = "ano_processo", nullable = false)
+
+    @Column(name = "ano_processo")
     private Integer ano;
+
     @Column(name = "data_processo")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @CreatedDate
     private LocalDate dataCadastro;
+
+
     @Column(nullable = false)
     @OneToMany(mappedBy = "processo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Pessoa> pessoas = new ArrayList<>();
