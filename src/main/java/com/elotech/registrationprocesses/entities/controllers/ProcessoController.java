@@ -3,7 +3,9 @@ package com.elotech.registrationprocesses.entities.controllers;
 
 import com.elotech.registrationprocesses.entities.Processo;
 import com.elotech.registrationprocesses.entities.services.ProcessoService;
+import com.elotech.registrationprocesses.entities.services.exceptions.UpdateDataException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -36,6 +38,7 @@ public class ProcessoController {
     }
 
     // post
+
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Processo> updateProcesso(@PathVariable Long id, @RequestBody Processo newProcesso) {
         Processo oldProcesso = processoService.findById(id);

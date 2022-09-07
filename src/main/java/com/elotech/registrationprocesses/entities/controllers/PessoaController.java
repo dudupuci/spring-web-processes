@@ -2,16 +2,12 @@ package com.elotech.registrationprocesses.entities.controllers;
 
 import com.elotech.registrationprocesses.entities.Pessoa;
 import com.elotech.registrationprocesses.entities.services.PessoaService;
-import io.netty.handler.codec.http.HttpResponseStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.annotation.HttpConstraint;
 import javax.validation.Valid;
-import javax.xml.ws.Response;
 import java.net.URI;
 import java.util.List;
 
@@ -45,6 +41,7 @@ public class PessoaController {
         pessoa = pessoaService.insertPessoa(pessoa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pessoa.getId()).toUri();
         return ResponseEntity.created(uri).body(pessoa);
+
     }
 
 
@@ -59,8 +56,7 @@ public class PessoaController {
 
 
     // delete by id
-    @RequestMapping(value = "/{id}", method = RequestMethod.
-            DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         pessoaService.deletePessoa(id);
         return ResponseEntity.noContent().build();
