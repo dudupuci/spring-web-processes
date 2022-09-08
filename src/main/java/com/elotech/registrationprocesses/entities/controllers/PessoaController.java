@@ -46,7 +46,7 @@ public class PessoaController {
 
 
     // put, update
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "alterar/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Pessoa> updatePessoa(@PathVariable Long id, @RequestBody Pessoa pessoa) {
         Pessoa oldPessoa = pessoaService.findById(id);
         pessoaService.updateDataPessoa(pessoa, oldPessoa);
@@ -56,7 +56,7 @@ public class PessoaController {
 
 
     // delete by id
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "remover/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         pessoaService.deletePessoa(id);
         return ResponseEntity.noContent().build();
