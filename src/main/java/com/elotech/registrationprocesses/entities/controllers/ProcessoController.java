@@ -3,9 +3,7 @@ package com.elotech.registrationprocesses.entities.controllers;
 
 import com.elotech.registrationprocesses.entities.Processo;
 import com.elotech.registrationprocesses.entities.services.ProcessoService;
-import com.elotech.registrationprocesses.entities.services.exceptions.UpdateDataException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -38,7 +36,6 @@ public class ProcessoController {
     }
 
     // post
-
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Processo> updateProcesso(@PathVariable Long id, @RequestBody Processo newProcesso) {
         Processo oldProcesso = processoService.findById(id);
@@ -47,7 +44,7 @@ public class ProcessoController {
         return ResponseEntity.ok().body(newProcesso);
     }
 
-    // put
+    // put, update
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Processo> insertProcesso(@Valid @RequestBody Processo processo) {
         processo = processoService.insertProcesso(processo);
@@ -61,6 +58,14 @@ public class ProcessoController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         processoService.deleteProcesso(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    // delete all
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteAll() {
+        List<Processo> list = processoService.findAll();
+        processoService.deleteAll(list);
         return ResponseEntity.noContent().build();
     }
 

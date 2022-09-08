@@ -8,10 +8,10 @@ public class UpdateDataException extends RuntimeException {
     private static final long SerialVersionUID = 1L;
 
     public UpdateDataException(Processo processo) {
-        super("Error trying to update the process number: "+processo.getNumero());
+        super("Error trying to update the process number: " + processo.getNumero());
     }
 
-    public UpdateDataException(Pessoa pessoa){
-        super("Error trying to update the person: "+pessoa.getNome());
+    public UpdateDataException(Pessoa pessoa) {
+        super("Error trying to update the person: " + pessoa.getNome());
     }
 }

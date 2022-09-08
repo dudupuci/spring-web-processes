@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
+
 @Getter
 @Setter
 public class StandardError implements Serializable {
@@ -20,7 +21,7 @@ public class StandardError implements Serializable {
     private String message;
     private String path;
 
-    public StandardError(Instant timestamp, Integer status, String error, String message, String path){
+    public StandardError(Instant timestamp, Integer status, String error, String message, String path) {
         super();
         this.timestamp = timestamp;
         this.status = status;
@@ -28,7 +29,6 @@ public class StandardError implements Serializable {
         this.message = message;
         this.path = path;
     }
-
 
 
 }

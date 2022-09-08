@@ -50,8 +50,5 @@ public class ConfigTest implements CommandLineRunner {
         pessoaRepository.save(pessoa3);
 
 
-
-
-
     }
 }

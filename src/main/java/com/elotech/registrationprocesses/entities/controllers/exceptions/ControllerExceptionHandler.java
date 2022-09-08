@@ -20,14 +20,6 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
-    @ExceptionHandler(PessoaDuplicateDataException.class)
-    public ResponseEntity<StandardError> personDuplicated(PessoaDuplicateDataException e, HttpServletRequest request) {
-        String error = "Error trying to duplicate data";
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
-        return ResponseEntity.status(status).body(err);
-    }
-
     @ExceptionHandler(UpdateDataException.class)
     public ResponseEntity<StandardError> updateNotSuccess(UpdateDataException e, HttpServletRequest request) {
         String error = "Error trying to update data. Please, check the ID's!";
@@ -37,8 +29,8 @@ public class ControllerExceptionHandler {
     }
 
 
-    @ExceptionHandler(ProcessoDuplicateDataException.class)
-    public ResponseEntity<StandardError> processDuplicated(ProcessoDuplicateDataException e, HttpServletRequest request) {
+    @ExceptionHandler(DuplicatedDataException.class)
+    public ResponseEntity<StandardError> processDuplicated(DuplicatedDataException e, HttpServletRequest request) {
         String error = "Error trying to duplicate data";
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());

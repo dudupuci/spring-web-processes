@@ -2,7 +2,7 @@ package com.elotech.registrationprocesses.entities.services;
 
 import com.elotech.registrationprocesses.entities.Pessoa;
 import com.elotech.registrationprocesses.entities.repositories.PessoaRepository;
-import com.elotech.registrationprocesses.entities.services.exceptions.PessoaDuplicateDataException;
+import com.elotech.registrationprocesses.entities.services.exceptions.DuplicatedDataException;
 import com.elotech.registrationprocesses.entities.services.exceptions.ControllerNotFoundException;
 import com.elotech.registrationprocesses.entities.services.exceptions.UpdateDataException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class PessoaService {
         try {
             return pessoaRepository.save(pessoa);
         } catch (Exception e) {
-            throw new PessoaDuplicateDataException(pessoa);
+            throw new DuplicatedDataException(pessoa);
         }
     }
 
@@ -61,11 +61,11 @@ public class PessoaService {
 
 
     public void updateDataPessoa(Pessoa newPessoa, Pessoa oldPessoa) {
-            oldPessoa.setNome(newPessoa.getNome());
-            oldPessoa.setCpf(newPessoa.getCpf());
-            oldPessoa.setDataCadastro(newPessoa.getDataCadastro());
-            oldPessoa.setDataNascimento(newPessoa.getDataNascimento());
-            oldPessoa.setProcesso(newPessoa.getProcesso());
+        oldPessoa.setNome(newPessoa.getNome());
+        oldPessoa.setCpf(newPessoa.getCpf());
+        oldPessoa.setDataCadastro(newPessoa.getDataCadastro());
+        oldPessoa.setDataNascimento(newPessoa.getDataNascimento());
+        oldPessoa.setProcesso(newPessoa.getProcesso());
     }
 
 

@@ -32,7 +32,7 @@ public class PessoaController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Pessoa> findById(@PathVariable Long id) {
         Pessoa pessoa = pessoaService.findById(id);
-            return ResponseEntity.ok().body(pessoa);
+        return ResponseEntity.ok().body(pessoa);
     }
 
     // post
@@ -64,8 +64,8 @@ public class PessoaController {
 
     // delete all
     @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteAll(List<Pessoa> list) {
-        list = pessoaService.findAll();
+    public ResponseEntity<Void> deleteAll() {
+        List<Pessoa> list = pessoaService.findAll();
         pessoaService.deleteAll(list);
         return ResponseEntity.noContent().build();
     }

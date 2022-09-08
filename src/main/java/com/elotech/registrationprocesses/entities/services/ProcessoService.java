@@ -1,17 +1,15 @@
 package com.elotech.registrationprocesses.entities.services;
 
 import com.elotech.registrationprocesses.entities.Processo;
-import com.elotech.registrationprocesses.entities.controllers.exceptions.StandardError;
 import com.elotech.registrationprocesses.entities.repositories.ProcessoRepository;
 import com.elotech.registrationprocesses.entities.services.exceptions.ControllerNotFoundException;
-import com.elotech.registrationprocesses.entities.services.exceptions.ProcessoDuplicateDataException;
+import com.elotech.registrationprocesses.entities.services.exceptions.DuplicatedDataException;
 import com.elotech.registrationprocesses.entities.services.exceptions.UpdateDataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 
-import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -33,7 +31,7 @@ public class ProcessoService {
         try {
             return processoRepository.save(processo);
         } catch (Exception e) {
-            throw new ProcessoDuplicateDataException(processo);
+            throw new DuplicatedDataException(processo);
         }
 
     }
@@ -73,4 +71,7 @@ public class ProcessoService {
 
     }
 
+    public void deleteAll(List<Processo> list) {
+        processoRepository.deleteAll(list);
+    }
 }
