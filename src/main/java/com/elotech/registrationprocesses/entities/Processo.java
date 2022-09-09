@@ -48,9 +48,12 @@ public class Processo implements Serializable {
     private Long id;
 
     @Column(name = "numero_processo", unique = true)
+    @Digits(integer = 6, message = "Numero do processo inválido!", fraction = 0)
     private Long numero;
 
     @Column(name = "ano_processo")
+    @Min(value = 2019, message = "O ano não pode ser menor do que 2019!")
+    @Max(value = 2030, message = "O ano não pode ser maior do que 2030!")
     private Integer ano;
 
     @Column(name = "data_processo")
