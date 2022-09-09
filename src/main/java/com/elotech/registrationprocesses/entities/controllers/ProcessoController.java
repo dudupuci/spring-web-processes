@@ -36,7 +36,7 @@ public class ProcessoController {
     }
 
     // post
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "alterar/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Processo> updateProcesso(@PathVariable Long id, @RequestBody Processo newProcesso) {
         Processo oldProcesso = processoService.findById(id);
         processoService.updateProcesso(newProcesso, oldProcesso);
@@ -55,7 +55,7 @@ public class ProcessoController {
 
 
     // delete by id
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "remover/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         processoService.deleteProcesso(id);
         return ResponseEntity.noContent().build();
