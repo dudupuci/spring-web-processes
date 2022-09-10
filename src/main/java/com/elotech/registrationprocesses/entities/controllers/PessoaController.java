@@ -1,14 +1,19 @@
 package com.elotech.registrationprocesses.entities.controllers;
 
 import com.elotech.registrationprocesses.entities.Pessoa;
+import com.elotech.registrationprocesses.entities.repositories.PessoaRepository;
 import com.elotech.registrationprocesses.entities.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,6 +24,8 @@ public class PessoaController {
 
     @Autowired
     private PessoaService pessoaService;
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
 
     // get All
@@ -27,6 +34,25 @@ public class PessoaController {
         List<Pessoa> list = pessoaService.findAll();
         return ResponseEntity.ok().body(list);
     }
+
+    // Pagination by number and size
+    @RequestMapping(method = RequestMethod.GET, value = "/pagination/{pageNumber}/{pageSize}")
+    public ResponseEntity<List<Pessoa>> getAllPagination(@PathVariable int pageNumber, @PathVariable int pageSize) {
+        return ResponseEntity.ok().body(pessoaService.pagination(pageNumber, pageSize));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/simplePage")
+    public Page<Pessoa> simplePagination() {
+        Page<Pessoa> page = pessoaService.findAllPage(PageRequest.of(0,20));
+        return ResponseEntity.ok().body(page).getBody();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/paramPage")
+    public Page<Pessoa> paramPagination(Pageable pageable) {
+        Page<Pessoa> page = pessoaService.findAllPageable(pageable);
+        return ResponseEntity.ok().body(page).getBody();
+    }
+
 
     // get by id
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -69,6 +95,19 @@ public class PessoaController {
         pessoaService.deleteAll(list);
         return ResponseEntity.noContent().build();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/filter")
+    public ResponseEntity<List<Pessoa>> findPersonByName(@RequestParam("nome") String nome) {
+      return ResponseEntity.ok().body(pessoaRepository.findByNomeContains(nome));
+      // or: return this.pessoaRepository.findByNomeContains(nome);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/filterAll")
+    public ResponseEntity<List<Pessoa>> findPersonByNameAndCpf(@RequestParam("nome") String nome,
+                                                               @RequestParam("cpf")String cpf) {
+        return ResponseEntity.ok().body(pessoaRepository.findByNomeAndCpfContains(nome, cpf));
+    }
+
 
 
 }

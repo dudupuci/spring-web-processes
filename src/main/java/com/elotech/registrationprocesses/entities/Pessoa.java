@@ -9,12 +9,18 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 // Lombok auto-generation getters and setters.
@@ -25,7 +31,7 @@ import java.time.LocalDate;
 // Lombok generate toString method.
 @ToString
 @Entity
-@Table(name="tb_pessoa")
+@Table(name = "tb_pessoa")
 public class Pessoa implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -72,7 +78,16 @@ public class Pessoa implements Serializable {
     @JsonIgnore // Anotei para não dar o erro de JSON na requisição, se não entraria em loop infinito.
     private Processo processo;
 
-
-
+    /*public Specification<Pessoa> toSpec() {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicados = new ArrayList<>();
+            if (StringUtils.hasText(nome)) {
+                // tipagem dinâmica
+                Path<String> campoNome = root.<String>get("nome");
+                Predicate predicadoNome = criteriaBuilder.equal(campoNome, nome);
+                predicados.add(predicadoNome);
+            }
+            return criteriaBuilder.and(predicados.toArray(new Predicate[0]));
+        };*/
 
 }
